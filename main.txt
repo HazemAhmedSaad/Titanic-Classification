@@ -1,0 +1,54 @@
+merge
+inplace=True
+pd.concat
+set_index
+describe()
+np.arange()
+gamma :[]
+best_params_
+C معامل 
+
+grid = {"C": np.arange(1, 7, 1), 'gamma':[
+    0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 5]}
+svm0 = SVC(random_state=42)
+svm_cv = GridSearchCV(svm0, grid, cv=10)
+svm_cv.fit(x, y)
+print("Best parameters of SVC :", svm_cv.best_params_)
+
+svm = SVC(C=svm_cv.best_params_["C"], gamma=svm_cv.best_params_[
+          "gamma"], random_state=42)
+svm.fit(train_x, train_y)
+print("SVC Accuracy :", svm.score(test_x, test_y))
+
+# algorithms = [logreg,knn,rf,svm]
+
+# for alg in algorithms:
+#     accuracies = cross_val_score(estimator=alg, X=x, y=y, cv=30)
+#     print("{0}: \t {1}".format(alg,accuracies.mean()))
+
+# for alg in algorithms:
+#     scores = f1_score(test_y, alg.predict(test_x),average=None)
+#     print("{0}: \t {1}".format(alg,scores))
+
+
+# logreg_prediction = logreg.predict(test_x)
+# plt.figure()
+# sns.heatmap(confusion_matrix(test_y, logreg_prediction), annot=True, fmt=".0f")
+# plt.xlabel("Predicted label")
+# plt.ylabel("True label")
+# plt.title("Logistic Regression Confusion Matrix")
+
+# print(classification_report(test_y, logreg_prediction))
+
+
+# svm_prediction = svm.predict(test_x)
+# plt.figure()
+# sns.heatmap(confusion_matrix(test_y, svm_prediction), annot=True, fmt=".0f")
+# plt.xlabel("Predicted label")
+# plt.ylabel("True label")
+# plt.title("SVM Confusion Matrix")
+
+
+# print(classification_report(test_y, svm_prediction))
+
+metrics.zero_one_loss
